@@ -17,7 +17,12 @@
         <div class="user-section col-md-3" align='right'>
           <%= link_to content_tag(:i, "", :class => "fa fa-compass black"), "#" %>
           <%= link_to content_tag(:i, "", :class => "fa fa-heart black"), "#" %>
-          <%= link_to content_tag(:i, "", :class => "fa fa-user black"), "#" %>
+          <% if user_signed_in? %>
+            <%= link_to content_tag(:i, "", :class => "fa fa-user black"), user_path(current_user) %>
+            <%= link_to content_tag(:i, "", :class => "fa fa-sign-out black"), destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to content_tag(:i, "", class: "fa fa-sign-in black"), new_user_session_path %>
+          <% end %>
         </div>
       </div>
     </div>
