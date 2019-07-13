@@ -16,7 +16,7 @@
           <span>
             <%= @user.posts.count %>
           </span>
-          <%= pluralize_without_count @user.posts.count, 'post', ' ' %>
+          <%= "Post".pluralize @user.posts.count %>
         </li>
         <li><span>195</span> followers</li>
         <li><span>345</span> following</li>
