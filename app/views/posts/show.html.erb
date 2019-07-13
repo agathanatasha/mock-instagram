@@ -6,9 +6,9 @@
     <div class="user">
       <div class="avatar">
         <% if @post.user.avatar.attached? %>
-          <%= link_to user_path(@post.user) do %>
-            <%= image_tag @post.user.avatar %>
-          <% end %>
+          <%= image_tag @post.user.avatar %>
+        <% else %>
+          <%= image_tag 'avatar-placeholder' %>
         <% end %>
       </div>
       <%= link_to @post.user.username, user_path(@post.user), class: 'username' %>
@@ -16,5 +16,12 @@
     <div class="description">
       <%= @post.description %>
     </div>
+    <% if @post.user == current_user %>
+      <div class="delete">
+        <% if current_user.posts.exists?(@post.id) %>
+          <%= link_to 'Delete Post', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
