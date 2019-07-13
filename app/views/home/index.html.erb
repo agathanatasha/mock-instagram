@@ -1,7 +1,9 @@
 <div class="homepage">
-  <div class='form-upload'>
-    <%= render 'upload_form' %>
-  </div>
+  <% if user_session %>
+    <div class='form-upload'>
+      <%= render 'upload_form' %>
+    </div>
+  <% end %>
   <div class="posts">
     <% @posts.each do |post| %>
       <%= render partial: 'post', locals: { post: post } %>
