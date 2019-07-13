@@ -18,6 +18,8 @@ gem 'devise'
 # use bootstrap for UI
 gem 'bootstrap'
 gem 'font-awesome-rails'
+# use kaminari for pagination
+gem 'kaminari'
 # Use jquery
 gem 'jquery-rails'
 # Use CoffeeScript for .coffee assets and views
