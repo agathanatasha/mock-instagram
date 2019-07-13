@@ -1,11 +1,7 @@
 <div class="user-images">
-  <div class="wrapper">
-    <img src="your_image_url">
-  </div>
-  <div class="wrapper">
-    <img src="your_image_url">
-  </div>
-  <div class="wrapper">
-    <img src="your_image_url">
-  </div>
+  <% @posts.each do |post| %>
+    <div class="wrapper">
+      <%= image_tag post.image %>
+    </div>
+  <% end %>
 </div>

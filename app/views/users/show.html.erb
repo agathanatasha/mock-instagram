@@ -12,7 +12,12 @@
           <%= link_to content_tag(:button, "Edit Profile"), edit_user_path(@user), class: "edit-profile" %>
       </div>
       <ul class="posts">
-        <li><span>12</span> posts</li>
+        <li>
+          <span>
+            <%= @user.posts.count %>
+          </span>
+          <%= pluralize_without_count @user.posts.count, 'post', ' ' %>
+        </li>
         <li><span>195</span> followers</li>
         <li><span>345</span> following</li>
       </ul>
