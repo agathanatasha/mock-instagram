@@ -2,7 +2,11 @@
   <div class="profile row">
     <div class="col-md-4 avatar">
       <div class="wrapper">
-        <img src="https://instuigram-avatar.jpg">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar %>
+        <% else %>
+          <%= image_tag 'avatar-placeholder.png' %>
+        <% end %>
       </div>
     </div>
     
