@@ -1,9 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_many :post_hash_tags
+  has_many :post_hash_tags, dependent: :destroy
   has_many :hash_tags, through: :post_hash_tags
-  after_commit :create_link_hash_tags
+  after_commit :create_link_hash_tags, on: :create
 
   has_one_attached :image
 
