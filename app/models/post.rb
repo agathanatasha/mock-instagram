@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   has_many :post_hash_tags
   has_many :hash_tags, through: :post_hash_tags
-  after_commit :create_hash_tags, on: :create
+  after_commit :create_link_hash_tags
 
   has_one_attached :image
 
@@ -13,13 +13,21 @@ class Post < ApplicationRecord
     errors.add(:image, "can't be blank") unless image.attached?  
   end
 
-  def create_hash_tags
-    extract_name_hash_tags.each do |name|
-      hash_tags.create(name: name)
+  def create_link_hash_tags
+    extract_hash_tag_names.each do |name|
+        hash_tag = HashTag.find_by(name: name)
+        hash_tag = HashTag.create(name: name) if hash_tag.nil?
+        hash_tags << hash_tag          
     end
   end
 
+  # def create_hash_tags
+  #   extract_hash_tag_names.each do |name|
+  #     hash_tags.create(name: name)
+  #   end
+  # end
+
   def extract_hash_tag_names
-    description.to_s.scan(/#\w+/).map{|name| name.gsub("#", "").downcase}
+      description.to_s.scan(/#\w+/).map{|name| name.gsub("#", "").downcase}
   end
 end

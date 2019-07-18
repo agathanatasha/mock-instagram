@@ -13,9 +13,10 @@
       </div>
       <%= link_to @post.user.username, user_path(@post.user), class: 'username' %>
     </div>
-    <div class="description">
-      <%= @post.description %>
-    </div>
+    <%= render 'shared/post_description', post: @post %>
+    <%# <div class="description"> %>
+      <%#= @post.description %>
+    <%# </div> %>
     <% if @post.user == current_user %>
       <div class="delete">
         <% if current_user.posts.exists?(@post.id) %>

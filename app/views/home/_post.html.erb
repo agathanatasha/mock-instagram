@@ -10,8 +10,9 @@
     <%= link_to post.user.username, user_path(post.user), class: 'username' %>
   </div>
   <%= image_tag post.image, class: 'main-image' %>
-  <div class="description">
-    <%= post.description %>
+  <%= render 'shared/post_description', post: post %>
+  <%# <div class="description"> %>
+    <%#= post.description %>
     <%#= render partial: "posts/description", locals: {post: post} %>
-  </div>
+  <%# </div> %>
 </section>
