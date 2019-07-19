@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
   has_one_attached :avatar
-  # validates :username, presence: true
-  # validates :name, presence: true
+
+  validates :username, format: { with: /\A[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*\z/},
+                       length: { minimum: 3, maximum: 40 },
+                       presence: true,
+                       uniqueness: true
 end
