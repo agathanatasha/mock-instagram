@@ -26,7 +26,9 @@
         <li><span>345</span> following</li>
       </ul>
       <h2 class="name"><%= @user.name %></h2>
-      <a class="website"><%= @user.website %></a>
+      <% unless @user.website.blank?%>
+        <%= link_to @user.website, create_url(@user.website), class: "website" %>
+      <% end %>
     </div>
   </div>
 </div>
