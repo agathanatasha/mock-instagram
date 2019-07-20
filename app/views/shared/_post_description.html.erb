@@ -2,6 +2,8 @@
     <% post.description.to_s.split(' ').each do |word| %>
         <% if word.start_with?('#') %>
             <%= link_to word, search_path(query: word) %>
+        <% elsif word.start_with?('@') %>
+            <%= link_to word, user_path(User.find_by(username: word[1..-1])) %>
         <% else %>
             <%= word %>
         <% end %>
