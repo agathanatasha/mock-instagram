@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
     has_many :mentions
 
+    # accept email as username for google authentication
     USERNAME_REGEX = Regexp.union(/\A[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*\z/, Devise.email_regexp)
     validates :username, format: USERNAME_REGEX,
               length: { minimum: 3, maximum: 40 },
