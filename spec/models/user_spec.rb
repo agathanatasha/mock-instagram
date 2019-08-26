@@ -35,6 +35,10 @@ describe User do
             it 'allows hyphen character' do
                 expect(build(:user, username: Faker::Internet.username(specifier: 10, separators: %w(-)))).to be_valid
             end
+
+            it 'allows email' do
+                expect(build(:user, username: Faker::Internet.email)).to be_valid
+            end
         end
 
         context 'uniqueness' do

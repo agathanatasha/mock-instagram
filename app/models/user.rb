@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
     has_many :mentions
 
-    validates :username, format: { with: /\A[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*\z/},
+    USERNAME_REGEX = Regexp.union(/\A[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*\z/, Devise.email_regexp)
+    validates :username, format: USERNAME_REGEX,
               length: { minimum: 3, maximum: 40 },
               presence: true,
               uniqueness: {case_sensitive: false}
@@ -20,19 +21,11 @@ class User < ApplicationRecord
 
         # Uncomment the section below if you want users to be created if they don't exist
         unless user
-            user = User.create(name: data['name'],
+            user = User.create(username: data['email'],
                email: data['email'],
                password: Devise.friendly_token[0,20]
             )
         end
         user
-    end
-
-    def self.new_with_session(params, session)
-        super.tap do |user|
-            if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-            user.email = data["email"] if user.email.blank?
-            end
-        end
     end
 end
