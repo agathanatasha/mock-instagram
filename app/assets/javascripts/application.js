@@ -17,3 +17,29 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+function init() {
+    gapi.load('auth2', function() {
+      // Ready.
+      $('.google-login-button').click(function(e) {
+        e.preventDefault();
+        
+        gapi.auth2.authorize({
+          client_id: 'YOUR_CLIENT_ID',
+          cookie_policy: 'single_host_origin',
+          scope: 'email profile',
+          response_type: 'code'
+        }, function(response) {
+          if (response && !response.error) {
+            // google authentication succeed, now post data to server.
+            jQuery.ajax({type: 'POST', url: '/auth/google_oauth2/callback', data: response,
+              success: function(data) {
+                // response from server
+              }
+            });        
+          } else {
+            // google authentication failed
+          }
+        });
+      });
+    });
+  };

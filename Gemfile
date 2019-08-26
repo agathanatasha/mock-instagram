@@ -33,6 +33,10 @@ gem 'exception_handler', '~> 0.8.0.0'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# google OAuth
+gem 'omniauth-google-oauth2'
+# env manager
+gem 'figaro'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
